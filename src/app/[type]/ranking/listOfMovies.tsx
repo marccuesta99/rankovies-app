@@ -12,7 +12,7 @@ const fetchMovies = () => {
   return fetch('https://api.themoviedb.org/3/movie/popular', options).then(res => res.json())
 }
 
-const getProviders = (id:string) => {
+export const getProviders = (id:string) => {
   const options = {
     method: 'GET',
     headers: {

@@ -31,14 +31,14 @@ export default function Home () {
 
 function Header () {
   return (
-    <header className='flex flex-col justify-center items-center gap-4 max-w-4xl bg-gray-400 dark:bg-transparent p-8'>
+    <header className='flex flex-col justify-center items-center gap-4 max-w-4xl dark:bg-gray-400 dark:bg-transparent p-8 pt-0'>
       <Image src={Logo} alt='logo' width={150} height={150} />
       <h2 className='text-2xl text-gray-900 dark:text-white'>Welcome to Rankovies!</h2>
       <p className='hidden md:block text-center text-gray-700 dark:text-gray-400'>Your ultimate destination for movie and TV show rankings, with a twist. </p>
-      <p className='text-center text-gray-700 dark:text-gray-400'>
+      <p className='text-center text-gray-700 dark:text-gray-400 mb-0'>
         Unveil the rankings by inputting your current watch or favorite. Join a community shaping rankings based on your input.
       </p>
-      <h5 className='text-center text-bold first-letter:text-yellow-400 dark:text-yellow-300'>Start now and discover where your favorites stand!</h5>
+      <h5 className='text-center text-bold text-yellow-500 dark:text-yellow-300'>Start now and discover where your favorites stand!</h5>
     </header>
   )
 }
