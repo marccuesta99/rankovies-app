@@ -1,35 +1,12 @@
-import { getProviders } from '../ranking/listOfMovies'
+import { fetchMovieById, getMovieProviders, getMovieVideos } from '@/api/movies'
+
 import StreamingPlatformSwitcher from './components/platformButtons'
-
-const fetchMovie = (id:string) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZjQ5NjUzODljYWYxYzQ1YjI4ZmRkYTYwN2QwZTU2YSIsInN1YiI6IjY1NmI3NmVmNGE0YmY2MDBjNTAyMDljMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tGVHFN6pstM1zCjYnTp7gtWZ26Ctc0Js4_JMPdrqgCQ'
-    }
-  }
-
-  return fetch(`https://api.themoviedb.org/3/movie/${id}`, options).then(res => res.json())
-}
-
-const fetchVideos = (id:string) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZjQ5NjUzODljYWYxYzQ1YjI4ZmRkYTYwN2QwZTU2YSIsInN1YiI6IjY1NmI3NmVmNGE0YmY2MDBjNTAyMDljMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tGVHFN6pstM1zCjYnTp7gtWZ26Ctc0Js4_JMPdrqgCQ'
-    }
-  }
-
-  return fetch(`https://api.themoviedb.org/3/movie/${id}/videos`, options).then(res => res.json())
-}
 
 export default async function MoviePage ({ params }: {params: {id: string}}) {
   const { id } = params
-  const movie = await fetchMovie(id)
-  const providers = await getProviders(id)
-  const videos = await fetchVideos(id)
+  const movie = await fetchMovieById(id)
+  const providers = await getMovieProviders(id)
+  const videos = await getMovieVideos(id)
   console.log('movie', movie)
   console.log('providers', providers.results?.ES?.flatrate?.[0]?.provider_name)
   console.log('videos', videos)

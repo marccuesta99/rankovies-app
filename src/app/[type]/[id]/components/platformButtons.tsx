@@ -96,7 +96,7 @@ const StreamingPlatformSwitcher: React.FC<{ platform: StreamingPlatforms; url: s
   console.log('url', url)
 
   const renderPlatform = () => {
-    switch (platform.toLowerCase()) {
+    switch (platform?.toLowerCase()) {
       case StreamingPlatforms.NETFLIX:
         return <Netflix onClick={handleButtonClick} />
       case StreamingPlatforms.PRIME:
