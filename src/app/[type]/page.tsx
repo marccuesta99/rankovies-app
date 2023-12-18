@@ -1,5 +1,6 @@
 'use client'
 import { searchMovies } from '@/api/movies'
+import { Spinner } from '@/components/spinner/spinner'
 import { MovieResult } from '@/types/movies'
 import React, { useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
@@ -11,10 +12,18 @@ export default function InputPage ({ params }: {params: {type: string} }) {
   const [searchResults, setSearchResults] = useState<MovieResult[]>([])
   const [debouncedSearchText] = useDebounce(searchText, 400)
   const [displayCount, setDisplayCount] = useState(3) // Number of movies to display
+  const [loading, setLoading] = useState(false) // Loading state
 
   const fetchMovies = async () => {
-    const newResults = await searchMovies(debouncedSearchText, displayCount)
-    setSearchResults(newResults)
+    setLoading(true)
+    try {
+      const newResults = await searchMovies(debouncedSearchText, displayCount)
+      setSearchResults(newResults)
+    } catch (error) {
+      console.error('Error fetching movies:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,41 +69,43 @@ export default function InputPage ({ params }: {params: {type: string} }) {
             <label
               className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-yellow-400 peer-focus:dark:text-yellow-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
             >
-              {isMovie ? 'Novie title' : 'TV Show title'}
+              {isMovie ? 'Movie title' : 'TV Show title'}
             </label>
           </div>
-          {searchResults.length > 0 && (
-            <div className='w-full bg-white dark:bg-gray-800 max-h-[300px] overflow-scroll'>
-              <ul>
-                {searchResults.map((movie) => (
-                  <li
-                    key={movie.id}
-                    className='relative p-2 hover:bg-gray-100 cursor-pointer rounded dark:hover:bg-gray-700 overflow-hidden duration-300 flex items-center'
-                    onClick={() => handleClickMovie(movie.id, movie.title)}
-                  >
-                    <img
-                      src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                      alt={movie.title}
-                      className='w-20 h-auto mr-4 rounded'
-                    />
-                    <div className='flex flex-col'>
-                      <span className='text-lg font-bold'>{movie.title}</span>
-                      <span className='text-sm text-gray-500'>{movie.release_date.slice(0, 4)}</span>
+          {loading
+            ? <Spinner />
+            : searchResults.length > 0 && (
+              <div className='w-full bg-white dark:bg-gray-800 max-h-[300px] overflow-scroll'>
+                <ul>
+                  {searchResults.map((movie) => (
+                    <li
+                      key={movie.id}
+                      className='relative p-2 hover:bg-gray-100 cursor-pointer rounded dark:hover:bg-gray-700 overflow-hidden duration-300 flex items-center'
+                      onClick={() => handleClickMovie(movie.id, movie.title)}
+                    >
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                        alt={movie.title}
+                        className='w-20 h-auto mr-4 rounded'
+                      />
+                      <div className='flex flex-col'>
+                        <span className='text-lg font-bold'>{movie.title}</span>
+                        <span className='text-sm text-gray-500'>{movie.release_date.slice(0, 4)}</span>
 
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              {searchResults.length >= displayCount && (
-                <button
-                  onClick={handleShowMore}
-                  className='block w-full text-center text-blue-500 hover:underline focus:outline-none dark:text-blue-300'
-                >
-                  Show More
-                </button>
-              )}
-            </div>
-          )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {searchResults.length >= displayCount && (
+                  <button
+                    onClick={handleShowMore}
+                    className='block w-full text-center text-blue-500 hover:underline focus:outline-none dark:text-blue-300'
+                  >
+                    Show More
+                  </button>
+                )}
+              </div>
+            )}
           <button
             type='submit'
             className='mt-4 self-end text-gray-900 bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full min-w-[150px] sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-300 dark:hover:bg-yellow-400 dark:focus:ring-yellow-500'
