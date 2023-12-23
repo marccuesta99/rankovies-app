@@ -1,6 +1,6 @@
 import { MovieDetails, MovieResult, MovieSearchResponse } from '@/types/movies'
 
-export const fetchPopularMovies = async () => {
+export const fetchPopularMovies: () => Promise<MovieSearchResponse> = async () => {
   const options = {
     method: 'GET',
     headers: {
