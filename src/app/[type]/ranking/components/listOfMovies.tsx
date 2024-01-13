@@ -1,8 +1,9 @@
 import { fetchPopularMovies, getMovieProviders } from '@/api/movies'
 import Link from 'next/link'
 
-export async function ListOfMovies () {
+export async function ListOfMovies ({id}: {id:string}) {
   const movies = await fetchPopularMovies()
+  console.log('id', id)
 
   return (
 

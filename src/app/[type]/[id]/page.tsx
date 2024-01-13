@@ -7,9 +7,6 @@ export default async function MoviePage ({ params }: {params: {id: string}}) {
   const movie = await fetchMovieById(id)
   const providers = await getMovieProviders(id)
   const videos = await getMovieVideos(id)
-  console.log('movie', movie)
-  console.log('providers', providers.results?.ES?.flatrate?.[0]?.provider_name)
-  console.log('videos', videos)
 
   return (
     <div className='bg-white dark:bg-gray-800 text-black dark:text-white transition-all duration-500 h-screen'>

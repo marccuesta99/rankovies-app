@@ -37,8 +37,7 @@ export default function InputPage({ params }: { params: { type: string } }) {
 
   const handleClickMovie = (movieId: number, movieTitle: string) => {
     console.log('Clicked Movie ID:', movieId);
-    setSearchText(movieTitle); // Set input value to the clicked movie name
-    // You can perform further actions with the movie ID here
+    
   };
 
   const handleShowMore = () => {
@@ -61,7 +60,7 @@ export default function InputPage({ params }: { params: { type: string } }) {
           searchText={searchText}
           handleInputChange={handleInputChange}
         />
-       {debouncedSearchText.length === 0 ? <PopularMovies handleClickMovie={handleClickMovie}/>
+       {debouncedSearchText.length === 0 ? <PopularMovies/>
        :<SearchResults
           loading={loading}
           searchResults={searchResults}
