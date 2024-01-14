@@ -3,7 +3,6 @@ import Link from "next/link";
 
 export async function ListOfMovies({ id }: { id: string }) {
   const movies = await fetchPopularMovies();
-  console.log("id", id);
 
   return (
     <div className="relative overflow-x-auto">
@@ -27,9 +26,12 @@ export async function ListOfMovies({ id }: { id: string }) {
         <tbody>
           {movies.results.map(async (movie: any) => {
             const provider = await getMovieProviders(movie.id);
+            if (movie.id === id) console.log("movie", movie, id);
             return (
               <tr
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                className={`${
+                  movie?.id === id ? "bg-green-300" : "bg-white"
+                } border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`}
                 key={movie.id}
               >
                 <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">

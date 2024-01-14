@@ -10,11 +10,6 @@ export const metadata: Metadata = {
   description: "Best movies and TV shows ranking app",
 };
 
-/* const NavigationLinks = [
-  { label: 'Movies', route: '/movies' },
-  { label: 'TV Shows', route: '/tvShows' },
-] */
-
 export default function RootLayout({
   children,
 }: {
@@ -25,12 +20,7 @@ export default function RootLayout({
       <head>
         <title>Rankovies</title>
       </head>
-      <body className={inter.className}>
-        {/* <header>
-          <NavBar navLinks={NavigationLinks} />
-        </header> */}
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
