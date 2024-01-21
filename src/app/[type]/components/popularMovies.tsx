@@ -15,7 +15,7 @@ export function PopularMovies() {
   }, []);
 
   return (
-    <div className="w-full flex flex-wrap justify-between cursor-pointer">
+    <div className="flex overflow-x-auto space-x-4">
       {popularMovies?.slice(0, 10)?.map((movie) => (
         <Link
           href="/movies/ranking/[id]"
@@ -25,7 +25,7 @@ export function PopularMovies() {
           <img
             src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
             alt={movie.title}
-            className="w-24 h-auto rounded p-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700 mt-2"
+            className="w-[200px] bg-lime-200 h-auto rounded hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700 mt-2"
           />
         </Link>
       ))}
