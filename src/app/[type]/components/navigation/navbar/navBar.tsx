@@ -33,7 +33,7 @@ export const NavigationRoutes: RouteType[] = [
 
 export default function NavBar() {
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav className="bg-white dark:bg-gray-800/80 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
         {/*<LogoButton />*/}
         {/*<SearchButton />*/}
@@ -46,7 +46,7 @@ export default function NavBar() {
 const MainMenu = () => {
   return (
     <div className="items-center justify-between w-full" id="navbar-search">
-      <ul className="flex items-center justify-center font-medium gap-8 p-1 my-1  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul className="flex items-center justify-center font-medium gap-8 p-1 my-1 dark:border-gray-700">
         {NavigationRoutes.map((route) => (
           <NavButton key={route.as} route={route} />
         ))}

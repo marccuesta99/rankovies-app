@@ -25,7 +25,7 @@ export function PopularMovies() {
           <img
             src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
             alt={movie.title}
-            className="w-[200px] bg-lime-200 h-auto rounded hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700 mt-2"
+            className="min-w-[180px] md:min-w-[200px] bg-lime-200 h-auto rounded hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700 mt-2"
           />
         </Link>
       ))}

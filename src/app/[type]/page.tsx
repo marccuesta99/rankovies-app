@@ -62,7 +62,7 @@ const movieCategories = [
 export default function InputPage() {
   return (
     <div>
-      <div className="p-8">
+      <div className="p-8 md:p-16 flex flex-col gap-16 lg:gap-64">
         <Section
           title="Hot Picks"
           subtitle="Explore the latest sizzling movies in our collection"
@@ -74,7 +74,7 @@ export default function InputPage() {
           title="Movie Categories"
           subtitle="Explore curated collections based on your preferences."
         >
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-center md:px-48">
             {movieCategories.map((category, index) => (
               <Card key={index} {...category} />
             ))}
